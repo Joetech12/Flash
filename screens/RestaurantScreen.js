@@ -24,43 +24,56 @@ export default function RestaurantScreen() {
   const {
     params: {
       id,
-      title,
-      imgUrl,
-      rating,
-      type,
       address,
+      coordinates,
+      delivery_fee,
+      delivery_time,
       description,
       dishes,
-      lng,
+      image,
       lat,
+      lng,
+      name,
+      opening_time,
+      payment_type,
+      rating,
+      reviews,
     },
   } = useRoute();
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, []);
-  useEffect(()=>{
-      if(restaurant && restaurant.id!=id){
-          dispatch(emptyBasket());
-      }
-      dispatch(setRestaurant({
-          id,
-          title,
-          imgUrl,
-          rating,
-          type,
-          address,
-          description,
-          dishes,
-          lng,
-          lat
-      }))
-  },[])
+  useEffect(() => {
+    if (restaurant && restaurant.id != id) {
+      dispatch(emptyBasket());
+    }
+    dispatch(
+      setRestaurant({
+        id,
+        title: name,
+        delivery_time,
+        description,
+        dishes,
+        imgUrl: image,
+        rating,
+        lat,
+        lng,
+        delivery_fee,
+      })
+    );
+  }, []);
+
+  console.log(dishes);
+
   return (
     <>
       <BasketIcon />
       <ScrollView>
         <View className="relative pt-[0px]">
-          <Image className="w-full h-72" source={{uri: urlFor(imgUrl).url()}} />
+          <Image
+            className="w-full h-72"
+            source={{ uri: urlFor(image).url() }}
+          />
           {/* <Image className="w-full h-72" source={imgUrl} /> */}
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -74,8 +87,15 @@ export default function RestaurantScreen() {
           className="bg-white -mt-12 pt-6 pb-[20px]"
         >
           <View className="px-5">
-            <Text className="text-3xl font-bold">{title}</Text>
-            {/* copy this code from restaurant card */}
+            <View className="border-b border-gray-700/30 mb-[10px]">
+              <Text className="text-3xl font-bold">{name}</Text>
+              {/* copy this code from restaurant card */}
+              <Text className="text-gray-500 my-2">
+                {description?.length > 200
+                  ? description.slice(0, 200) + '...'
+                  : description}
+              </Text>
+            </View>
             <View className="flex-column space-y-2 my-1">
               <View className="flex-row items-center space-x-1">
                 <Image
@@ -84,19 +104,27 @@ export default function RestaurantScreen() {
                 />
                 <Text className="text-xs">
                   <Text className="text-green-700">{rating}</Text>
-                  <Text className="text-gray-700"> (4.6k review)</Text> ·{' '}
-                  <Text className="font-semibold text-gray-700">{type}</Text>
+                  <Text className="text-gray-700"> ({reviews} review)</Text>
                 </Text>
+              </View>
+
+              <View className="flex-row items-center space-x-1">
+                <Icon.Clock color="gray" width={15} height={15} />
+                <Text className="text-gray-800 text-xs"> {opening_time}</Text>
+              </View>
+              <View className="flex-row items-center space-x-1">
+                <Icon.CreditCard color="gray" width={15} height={15} />
+                <Text className="text-gray-800 text-xs"> {payment_type}</Text>
               </View>
               <View className="flex-row items-center space-x-1">
                 <Icon.MapPin color="gray" width={15} height={15} />
-                <Text className="text-gray-800 text-xs">
-                  {' '}
-                  Nearby · {address}
-                </Text>
+                <Text className="text-gray-800 text-xs"> {address}</Text>
+              </View>
+              <View className="flex-row items-center space-x-1">
+                <Icon.Truck color="gray" width={15} height={15} />
+                <Text className="text-gray-800 text-xs"> ₦{delivery_fee}</Text>
               </View>
             </View>
-            <Text className="text-gray-500 mt-2">{description}</Text>
           </View>
         </View>
         <View className="pb-36 bg-gray-100/10 ">
@@ -105,21 +133,21 @@ export default function RestaurantScreen() {
           {dishes.map((dish) => {
             return (
               <DishRow
-                  key={dish._id}
-                  id={dish._id}
-                  name={dish.name}
-                  description={dish.description}
-                  price={dish.price}
-                  image={dish.image}
+                key={dish._id}
+                id={dish._id}
+                name={dish.name}
+                description={dish.description}
+                price={dish.price}
+                image={dish.image}
               />
-            //   <DishRow
-            //     key={dish.id}
-            //     id={dish.id}
-            //     name={dish.name}
-            //     description={dish.description}
-            //     price={dish.price}
-            //     image={dish.image}
-            //   />
+              //   <DishRow
+              //     key={dish.id}
+              //     id={dish.id}
+              //     name={dish.name}
+              //     description={dish.description}
+              //     price={dish.price}
+              //     image={dish.image}
+              //   />
             );
           })}
         </View>

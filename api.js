@@ -21,6 +21,14 @@ export const getCategories = ()=>{
         *[_type == 'category']
     `);
 }
+export const getRestaurants = ()=>{
+    return sanityQuery(`
+    *[_type == 'restaurant']{
+        ...,
+        dishes[]->
+      }
+    `);
+}
 
 export const getFeaturedRestaurantById = id=>{
     return sanityQuery(`

@@ -10,7 +10,7 @@ import {
 import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 
-export default function DishRow({ name, description, id, price, image }) {
+export default function RestaurantRow({ name, description, id, price, image }) {
   const dispatch = useDispatch();
   const basketItems = useSelector((state) => selectBasketItemsById(state, id));
   const handleIncrease = () => {
@@ -35,17 +35,9 @@ export default function DishRow({ name, description, id, price, image }) {
           source={image}
         /> */}
         <View className="flex flex-1 space-y-3">
-          <View className="pl-3 ">
-            <Text className="text-[18px] mb-[5px]">
-              {name?.length > 40 ? name.slice(0, 40) + '...' : name}
-            </Text>
-            <Text className="text-gray-700">
-              {`(${
-                description?.length > 70
-                  ? description.slice(0, 70) + '...'
-                  : description
-              })`}
-            </Text>
+          <View className="pl-3">
+            <Text className="text-xl">{name}</Text>
+            <Text className="text-gray-700">{description}</Text>
           </View>
           <View className="flex-row pl-3 justify-between items-center">
             <Text className="text-gray-700 text-lg font-bold">₦{price}</Text>

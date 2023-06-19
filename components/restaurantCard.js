@@ -16,17 +16,20 @@ import * as Icon from 'react-native-feather';
 
 export default function RestaurantCard({
   id,
-  title,
-  imgUrl,
-  rating,
-  type,
   address,
+  coordinates,
+  delivery_fee,
+  delivery_time,
   description,
   dishes,
-  reviews,
-  lng,
+  image,
   lat,
-  stars,
+  lng,
+  name,
+  opening_time,
+  payment_type,
+  rating,
+  reviews,
 }) {
   // console.log(urlFor(imgUrl).url());
   const navigation = useNavigation();
@@ -35,17 +38,20 @@ export default function RestaurantCard({
       onPress={() => {
         navigation.navigate('Restaurant', {
           id,
-          title,
-          imgUrl,
-          rating,
-          type,
           address,
+          coordinates,
+          delivery_fee,
+          delivery_time,
           description,
           dishes,
-          lng,
-          reviews,
+          image,
           lat,
-          stars,
+          lng,
+          name,
+          opening_time,
+          payment_type,
+          rating,
+          reviews,
         });
       }}
     >
@@ -62,26 +68,36 @@ export default function RestaurantCard({
       >
         <Image
           className="h-36 w-64 rounded-t-3xl"
-          source={{ uri: urlFor(imgUrl).url() }}
+          source={{ uri: urlFor(image).url() }}
         />
         {/* <Image className="h-36 w-64 rounded-t-3xl" source={imgUrl} /> */}
 
         <View className="px-3 pb-4 space-y-2">
-          <Text className="text-lg font-bold pt-2">{title}</Text>
-          <View className="flex-row items-center space-x-1">
-            <Image
-              source={require('../assets/images/fullStar.png')}
-              className="h-4 w-4"
-            />
-            <Text className="text-xs">
-              <Text className="text-green-700">{stars}</Text>
-              <Text className="text-gray-700"> ({rating} review)</Text> ·{' '}
-              <Text className="font-semibold text-gray-700">{type}</Text>
-            </Text>
+          <Text className="text-lg font-bold pt-2">{name}</Text>
+          <View className="flex-row items-center space-x-4">
+            <View className="flex-row items-center space-x-1">
+              <Image
+                source={require('../assets/images/fullStar.png')}
+                className="h-4 w-4"
+              />
+              <Text className="text-xs">
+                <Text className="text-gray-700">{rating}</Text>
+                <Text className="text-gray-700"> ({reviews} review)</Text>
+                {/* <Text className="font-semibold text-gray-700">{type}</Text> */}
+              </Text>
+            </View>
+            <View className="flex-row items-center  space-x-1">
+              <Icon.Clock color="gray" width={15} height={15} />
+              <Text className="text-xs">
+                <Text className="text-gray-700">{delivery_time}</Text>
+              </Text>
+            </View>
           </View>
           <View className="flex-row items-center space-x-1">
             <Icon.MapPin color="gray" width={15} height={15} />
-            <Text className="text-gray-700 text-xs"> Nearby · {address}</Text>
+            <Text className="text-gray-700 text-xs">
+              {address?.length > 38 ? address.slice(0, 38) + '...' : address}
+            </Text>
           </View>
         </View>
       </View>

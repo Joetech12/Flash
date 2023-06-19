@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    restaurant: {
+  restaurant: {
     id: null,
     title: null,
     imgUrl: null,
     rating: null,
-    genre: null,
-    address: null, 
+    address: null,
     description: null,
     dishes: null,
     lng: null,
-    lat: null
-  }
-}
+    lat: null,
+    delivery_fee: null,
+  },
+};
 
 export const restaurantSlice = createSlice({
   name: 'restaurant',
@@ -21,13 +21,13 @@ export const restaurantSlice = createSlice({
   reducers: {
     setRestaurant: (state, action) => {
       state.restaurant = action.payload;
-    }
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { setRestaurant } = restaurantSlice.actions
+export const { setRestaurant } = restaurantSlice.actions;
 
-export const selectRestaurant = state=> state.restaurant.restaurant;
+export const selectRestaurant = (state) => state.restaurant.restaurant;
 
-export default restaurantSlice.reducer
+export default restaurantSlice.reducer;

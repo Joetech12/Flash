@@ -29,7 +29,7 @@ export default function BasketScreen() {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const deliveryFee = 500;
+  const deliveryFee = restaurant.delivery_fee;
   useMemo(() => {
     const gItems = basketItems.reduce((group, item) => {
       if (group[item.id]) {
@@ -57,7 +57,7 @@ export default function BasketScreen() {
         <View>
           <Text className="text-center font-bold text-xl">Your cart</Text>
           <Text className="text-center text-gray-500 mt-[10px]">
-            {restaurant?.title}
+            {restaurant?.name}
           </Text>
           {/* <Text className="text-center text-gray-500 mt-[10px]">
             {restaurant.name}
@@ -74,7 +74,9 @@ export default function BasketScreen() {
           source={require('../assets/images/bikeGuy.png')}
           className="w-20 h-20 rounded-full"
         />
-        <Text className="flex-1 pl-4">Deliver in 20-30 minutes</Text>
+        <Text className="flex-1 pl-4">
+          Deliver in {restaurant.delivery_time}
+        </Text>
         <TouchableOpacity onPress={navigation.goBack}>
           <Text style={{ color: themeColors.text }} className="font-bold">
             Change

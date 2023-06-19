@@ -43,6 +43,7 @@ export default function Categories() {
                   source={{
                     uri: urlFor(category.image).url(),
                   }}
+                  className='rounded-full'
                 />
               </TouchableOpacity>
               <Text className={'text-sm ' + textClass}>{category.name}</Text>
