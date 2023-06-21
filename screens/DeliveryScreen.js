@@ -10,7 +10,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRestaurant } from '../slices/restaurantSlice';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 import { featured } from '../constants';
@@ -18,55 +18,36 @@ import { emptyBasket } from '../slices/basketSlice';
 
 export default function DeliveryScreen() {
   const navigation = useNavigation();
-//   const restaurant = featured.restaurants[0]
+  //   const restaurant = featured.restaurants[0]
   const restaurant = useSelector(selectRestaurant);
   const dispatch = useDispatch();
-  const handleCancel = ()=>{
+  const handleCancel = () => {
     dispatch(emptyBasket());
-    navigation.navigate('Home')
-  }
+    navigation.navigate('Home');
+  };
+
   return (
     <View className="flex-1">
-      {/* <MapView
-        initialRegion={{
-            latitude: restaurant?.lat,
-            longitude: restaurant?.lng,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          }} 
-          className="flex-1"
-          mapType="standard"
-        >
-            <Marker 
-                coordinate={{
-                    latitude: restaurant?.lat,
-                    longitude: restaurant?.lng
-                }} 
-                title={restaurant?.title}
-                description={restaurant?.description}
-                pinColor={themeColors.bgColor(1)}
-            />
-        </MapView> */}
       <MapView
         initialRegion={{
+          latitude: restaurant.lat,
+          longitude: restaurant.lng,
+          latitudeDelta: 0.009,
+          longitudeDelta: 0.009,
+        }}
+        className="flex-1"
+        mapType="standard"
+      >
+        <Marker
+          coordinate={{
             latitude: restaurant.lat,
             longitude: restaurant.lng,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          }} 
-          className="flex-1"
-          mapType="standard"
-        >
-            <Marker 
-                coordinate={{
-                    latitude: restaurant.lat,
-                    longitude: restaurant.lng
-                }} 
-                title={restaurant.title}
-                description={restaurant.description}
-                pinColor={themeColors.bgColor(1)}
-            />
-        </MapView>
+          }}
+          title={restaurant.title}
+          description={restaurant.description}
+          pinColor={themeColors.bgColor(1)}
+        />
+      </MapView>
 
       <View className="rounded-t-3xl -mt-12 bg-white relative ">
         <TouchableOpacity className="absolute right-4 top-2"></TouchableOpacity>
@@ -104,7 +85,9 @@ export default function DeliveryScreen() {
           </View>
 
           <View className="flex-1 ml-3">
-            <Text className="text-lg font-bold text-white">Flash Agent 001</Text>
+            <Text className="text-lg font-bold text-white">
+              Flash Agent 001
+            </Text>
             <Text className="text-white font-semibold">Your Rider</Text>
           </View>
           <View className="flex-row items-center space-x-3 mr-3">

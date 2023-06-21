@@ -18,7 +18,7 @@ import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import { currencyFormatter } from '../utils/currencyFormat';
 
-export default function RestaurantScreen() {
+export default function FoodScreen() {
   const navigation = useNavigation();
   const restaurant = useSelector(selectRestaurant);
   let dispatch = useDispatch();

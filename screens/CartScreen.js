@@ -19,6 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import { featured } from '../constants';
+import { currencyFormatter } from '../utils/currencyFormat';
 
 export default function BasketScreen() {
   const restaurant = useSelector(selectRestaurant);
@@ -114,7 +115,7 @@ export default function BasketScreen() {
                 {items[0]?.name}
               </Text>
               <Text className="font-semibold text-base">
-                ₦{items[0]?.price}
+                ₦{currencyFormatter(items[0]?.price)}
               </Text>
               <TouchableOpacity
                 className="p-1 rounded-full"
@@ -139,15 +140,21 @@ export default function BasketScreen() {
       >
         <View className="flex-row justify-between">
           <Text className="text-gray-700">Subtotal</Text>
-          <Text className="text-gray-700">₦{basketTotal}</Text>
+          <Text className="text-gray-700">
+            ₦{currencyFormatter(basketTotal)}
+          </Text>
         </View>
         <View className="flex-row justify-between">
           <Text className="text-gray-700">Delivery Fee</Text>
-          <Text className="text-gray-700">₦{deliveryFee}</Text>
+          <Text className="text-gray-700">
+            ₦{currencyFormatter(deliveryFee)}
+          </Text>
         </View>
         <View className="flex-row justify-between">
           <Text className="font-extrabold">Order Total</Text>
-          <Text className="font-extrabold">₦{basketTotal + deliveryFee}</Text>
+          <Text className="font-extrabold">
+            ₦{currencyFormatter(basketTotal + deliveryFee)}
+          </Text>
         </View>
         <View>
           <TouchableOpacity

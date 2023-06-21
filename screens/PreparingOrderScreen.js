@@ -9,7 +9,7 @@ export default function PreparingOrderScreen() {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('Delivery');
-    }, 5000);
+    }, 7000);
   }, []);
   return (
     <View className="flex-1 bg-white justify-center items-center">

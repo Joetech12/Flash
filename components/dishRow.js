@@ -9,6 +9,7 @@ import {
 } from '../slices/basketSlice';
 import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
+import { currencyFormatter } from '../utils/currencyFormat';
 
 export default function DishRow({ name, description, id, price, image }) {
   const dispatch = useDispatch();
@@ -40,15 +41,17 @@ export default function DishRow({ name, description, id, price, image }) {
               {name?.length > 40 ? name.slice(0, 40) + '...' : name}
             </Text>
             <Text className="text-gray-700">
-              {`(${
-                description?.length > 70
-                  ? description.slice(0, 70) + '...'
+              {`${
+                description?.length > 90
+                  ? description.slice(0, 90) + '...'
                   : description
-              })`}
+              }`}
             </Text>
           </View>
           <View className="flex-row pl-3 justify-between items-center">
-            <Text className="text-gray-700 text-lg font-bold">₦{price}</Text>
+            <Text className="text-gray-700 text-lg font-bold">
+              ₦{currencyFormatter(price)}
+            </Text>
             <View className="flex-row items-center">
               <TouchableOpacity
                 onPress={handleDecrease}

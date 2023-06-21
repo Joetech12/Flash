@@ -9,6 +9,7 @@ import {
 } from '../slices/basketSlice';
 import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
+import { currencyFormatter } from '../utils/currencyFormat';
 
 export default function RestaurantRow({ name, description, id, price, image }) {
   const dispatch = useDispatch();
@@ -40,7 +41,9 @@ export default function RestaurantRow({ name, description, id, price, image }) {
             <Text className="text-gray-700">{description}</Text>
           </View>
           <View className="flex-row pl-3 justify-between items-center">
-            <Text className="text-gray-700 text-lg font-bold">₦{price}</Text>
+            <Text className="text-gray-700 text-lg font-bold">
+              ₦{currencyFormatter(price)}
+            </Text>
             <View className="flex-row items-center">
               <TouchableOpacity
                 onPress={handleDecrease}

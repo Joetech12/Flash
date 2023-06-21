@@ -6,6 +6,7 @@ import RestaurantScreen from '../screens/RestaurantScreen';
 import CartScreen from '../screens/CartScreen';
 import PreparingOrderScreen from '../screens/PreparingOrderScreen';
 import DeliveryScreen from '../screens/DeliveryScreen';
+import FoodScreen from '../screens/FoodScreen';
 // import PreparingOrderScreen from './screens/PreparingOrderScreen';
 // import DeliveryScreen from './screens/DeliveryScreen';
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ export default function Navigation() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+        <Stack.Screen name="Food" component={FoodScreen} />
         <Stack.Screen
           name="Cart"
           options={{ presentation: 'modal', headerShown: false }}
