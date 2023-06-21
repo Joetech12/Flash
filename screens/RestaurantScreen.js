@@ -39,7 +39,7 @@ export default function RestaurantScreen() {
       payment_type,
       rating,
       reviews,
-    },
+    } ,
   } = useRoute();
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });

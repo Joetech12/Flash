@@ -20,9 +20,13 @@ import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import { featured } from '../constants';
 import { currencyFormatter } from '../utils/currencyFormat';
+import { selectFood } from '../slices/foodSlice';
 
 export default function BasketScreen() {
   const restaurant = useSelector(selectRestaurant);
+  const food = useSelector(selectFood);
+
+  const usedRestaurant = restaurant || food.restaurant;
   //   const restaurant = featured.restaurants[0];
   const [groupedItems, setGroupedItems] = useState([]);
   const basketItems = useSelector(selectBasketItems);
@@ -30,7 +34,7 @@ export default function BasketScreen() {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const deliveryFee = restaurant.delivery_fee;
+  const deliveryFee = usedRestaurant.delivery_fee;
   useMemo(() => {
     const gItems = basketItems.reduce((group, item) => {
       if (group[item.id]) {
@@ -58,7 +62,7 @@ export default function BasketScreen() {
         <View>
           <Text className="text-center font-bold text-xl">Your cart</Text>
           <Text className="text-center text-gray-500 mt-[10px]">
-            {restaurant?.name}
+            {usedRestaurant?.name}
           </Text>
           {/* <Text className="text-center text-gray-500 mt-[10px]">
             {restaurant.name}
@@ -76,7 +80,7 @@ export default function BasketScreen() {
           className="w-20 h-20 rounded-full"
         />
         <Text className="flex-1 pl-4">
-          Deliver in {restaurant.delivery_time}
+          Deliver in {usedRestaurant.delivery_time}
         </Text>
         <TouchableOpacity onPress={navigation.goBack}>
           <Text style={{ color: themeColors.text }} className="font-bold">

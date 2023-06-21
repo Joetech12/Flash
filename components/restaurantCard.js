@@ -73,7 +73,7 @@ export default function RestaurantCard({
         {/* <Image className="h-36 w-64 rounded-t-3xl" source={imgUrl} /> */}
 
         <View className="px-3 pb-4 space-y-2">
-          <Text className="text-lg font-bold pt-2">{name}</Text>
+          <Text className="text-[16px] font-semibold pt-2">{name}</Text>
           <View className="flex-row items-center space-x-4">
             <View className="flex-row items-center space-x-1">
               <Image
