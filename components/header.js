@@ -5,9 +5,13 @@ import { ShoppingBagIcon } from 'react-native-heroicons/outline';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../slices/basketSlice';
 import { themeColors } from '../theme';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header() {
   const basketItems = useSelector(selectBasketItems);
+
+  const navigation = useNavigation();
 
   return (
     <View className="flex-row items-center space-x-2 px-4 pb-2 ">
@@ -27,7 +31,7 @@ export default function Header() {
         />
         <View className="flex-row items-center space-x-1 mr-[10px] border-0 border-l-2 pl-2 border-l-gray-300 relative">
           {/* <Icon.MapPin height="20" width="20" stroke="gray" />
-          <Text className="text-gray-600">Lagos, NG</Text> */}
+              <Text className="text-gray-600">Lagos, NG</Text> */}
           <ShoppingBagIcon height="20" width="20" stroke="gray" />
           <View
             style={{ backgroundColor: themeColors.bgColor(1) }}

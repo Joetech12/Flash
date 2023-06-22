@@ -3,7 +3,6 @@ import imageBuilder from '@sanity/image-url';
 import { REACT_APP_SANITY_PROJECT_ID } from '@env';
 
 export const client = createClient({
-  //   projectId: 'x5gvxvt6',
   projectId: `${REACT_APP_SANITY_PROJECT_ID}`,
   dataset: 'production',
   useCdn: true,

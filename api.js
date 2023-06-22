@@ -21,13 +21,27 @@ export const getCategories = () => {
         *[_type == 'category']
     `);
 };
+export const getCategoriesById = (id) => {
+  return sanityQuery(`
+        *[_type == 'category' && name == $id]
+    `);
+};
 
 export const getDishes = () => {
   return sanityQuery(`
     *[_type == 'dish']{
         ...,
         restaurant->,
-        category->
+        category[]->,
+      }
+    `);
+};
+export const getDishesById = (id) => {
+  return sanityQuery(`
+    *[references($id) && _type == 'dish']{
+        ...,
+        restaurant->,
+        category[]->
       }
     `);
 };

@@ -5,15 +5,8 @@ import { urlFor } from '../sanity';
 import { themeColors } from '../theme';
 import { categories } from '../constants';
 
-export default function Categories() {
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    getCategories().then((data) => {
-      // console.log('got data', data[0].name);
-      setCategories(data);
-    });
-  }, []);
+const Categories = ({ categories, selectedCategory, onCategoryPress }) => {
+  //   const [activeCategory, setActiveCategory] = useState(null);
 
   return (
     <View className="mt-4">
@@ -27,25 +20,33 @@ export default function Categories() {
         }}
       >
         {categories?.map((category, index) => {
-          let isActive = category._id == activeCategory;
-          let activeColor = themeColors.text;
-          let btnClass = isActive ? `bg-[${themeColors.text}]` : ' bg-gray-200';
+          let isActive = category._id == selectedCategory;
+          //   let activeColor = themeColors.text;
+          let btnClass = isActive ? 'bg-[#A52A2A]' : ' bg-gray-200';
           let textClass = isActive
-            ? `text-[${themeColors.text}] font-semibold`
+            ? 'text-[#A52A2A] font-semibold'
             : ' text-gray-500';
           return (
             <View key={index} className="flex justify-center items-center mr-6">
               <TouchableOpacity
-                onPress={() => setActiveCategory(category._id)}
+                onPress={() => onCategoryPress(category._id)}
                 className={'p-1 rounded-full shadow ' + btnClass}
               >
-                <Image
-                  style={{ width: 45, height: 45 }}
-                  source={{
-                    uri: urlFor(category.image).url(),
-                  }}
-                  className="rounded-full"
-                />
+                {category._id == 'All' ? (
+                  <Image
+                    style={{ width: 45, height: 45 }}
+                    source={require('../assets/icon.png')}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <Image
+                    style={{ width: 45, height: 45 }}
+                    source={{
+                      uri: urlFor(category.image).url(),
+                    }}
+                    className="rounded-full"
+                  />
+                )}
               </TouchableOpacity>
               <Text className={'text-sm ' + textClass}>{category.name}</Text>
             </View>
@@ -54,4 +55,6 @@ export default function Categories() {
       </ScrollView>
     </View>
   );
-}
+};
+
+export default React.memo(Categories);

@@ -49,7 +49,7 @@ export default function FoodCard({
           elevation: 3,
           //   backgroundColor: 'white',
         }}
-        className="mr-6 bg-white rounded-3xl border my-[8px] border-black/10"
+        className="mr-[16px] bg-white rounded-3xl border my-[8px] border-black/10"
       >
         <Image
           className="h-36 w-[220px] rounded-t-3xl"

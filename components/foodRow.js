@@ -7,8 +7,9 @@ import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import FoodCard from './foodCard';
 
-export default function FoodRow({ food }) {
+export default function FoodRow({ foods }) {
   //   const [restaurants, setRestaurants] = useState([]);
+    // const [selectFoods, setSelectFoods] = useState(foods);
 
   //   useEffect(() => {
   //     getFeaturedRestaurantById(id).then(data=>{
@@ -16,7 +17,7 @@ export default function FoodRow({ food }) {
   //       setRestaurants(data?.restaurants);
   //     })
   //   }, [id]);
-  // console.log(resturants);
+    // console.log(foods);
 
   return (
     <View className="">
@@ -28,7 +29,7 @@ export default function FoodRow({ food }) {
         }}
         className="overflow-visible py-5"
       >
-        {food.map((fd) => {
+        {foods?.map((fd) => {
           const { _id, description, image, category, restaurant, price, name } =
             fd;
 
@@ -45,9 +46,10 @@ export default function FoodRow({ food }) {
               price={price}
               description={description}
             />
-            
+            // <Text>Hello</Text>
           );
         })}
+        {/* <Text>Hello2</Text> */}
       </ScrollView>
     </View>
   );

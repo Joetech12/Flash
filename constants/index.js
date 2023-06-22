@@ -1,3 +1,18 @@
+export const ALL = {
+    _createdAt: '2022-06-19T13:28:16Z',
+    _id: 'All',
+    _rev: 'VeYZadK2P2lNQWjCmN39TP',
+    _type: 'category',
+    _updatedAt: '2022-06-19T14:05:31Z',
+    description: 'All',
+    image: {
+      _type: 'image',
+      asset: ['Object'],
+    },
+    name: 'All',
+  };
+
+
 export const categories = [
     {
         id: 1,
