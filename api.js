@@ -18,7 +18,7 @@ export const getFeaturedRestaurants = () => {
 
 export const getCategories = () => {
   return sanityQuery(`
-        *[_type == 'category']
+        *[_type == 'category'] | order(name asc)
     `);
 };
 export const getCategoriesById = (id) => {
@@ -32,7 +32,7 @@ export const getDishes = () => {
     *[_type == 'dish']{
         ...,
         restaurant->,
-        category[]->,
+        category->,
       }
     `);
 };
@@ -41,15 +41,21 @@ export const getDishesById = (id) => {
     *[references($id) && _type == 'dish']{
         ...,
         restaurant->,
-        category[]->
+        category[]->{
+            name,
+            ...,
+        }
       }
     `);
 };
 export const getRestaurants = () => {
   return sanityQuery(`
-    *[_type == 'restaurant']{
+    *[_type == 'restaurant'] {
         ...,
-        dishes[]->
+        dishes[]->{
+            name,
+            ...,
+        }
       }
     `);
 };

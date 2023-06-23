@@ -73,7 +73,7 @@ export default function HomeScreen() {
     // setFood(foodie);
     getDishes().then((data) => {
       setFood(data);
-      console.log(data)
+      //   console.log(data)
     });
   }, []);
 
@@ -82,9 +82,11 @@ export default function HomeScreen() {
       dispatch(setFoodData(foodie2));
     } else if (selectedTag) {
       const filteredDish = foodie2?.filter((dish) => {
-        const tag = dish?.category?.find((c) => c?.name === selectedTag);
-        return !!tag;
+        if (dish?.category?._id === selectedTag) {
+          return dish;
+        }
       });
+
       dispatch(setFoodData(filteredDish));
     } else {
       dispatch(setFoodData(foodie2));
@@ -93,7 +95,7 @@ export default function HomeScreen() {
 
   const allCategories = [ALL, ...categories];
 
-//   console.log(foodie);
+  //   console.log(foodie);
 
   return (
     <SafeAreaView className="bg-white pt-[10px]">

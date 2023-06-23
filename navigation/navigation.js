@@ -31,6 +31,7 @@ export default function Navigation() {
     });
     getRestaurants().then((data) => {
       setRestaurants(data);
+    //   console.log(data)
     });
   }, []);
 
