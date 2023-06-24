@@ -39,15 +39,15 @@ export default function RestaurantScreen() {
       payment_type,
       rating,
       reviews,
-    } ,
+    },
   } = useRoute();
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, []);
   useEffect(() => {
-    if (restaurant && restaurant.id != id) {
-      dispatch(emptyBasket());
-    }
+    // if (restaurant && restaurant.id != id) {
+    //   dispatch(emptyBasket());
+    // }
     dispatch(
       setRestaurant({
         id,
@@ -64,12 +64,13 @@ export default function RestaurantScreen() {
     );
   }, []);
 
+
   //   console.log(dishes);
 
   return (
     <>
       <BasketIcon />
-      <ScrollView>
+      <ScrollView >
         <View className="relative pt-[0px]">
           <Image
             className="w-full h-72"
@@ -121,13 +122,13 @@ export default function RestaurantScreen() {
                 <Icon.MapPin color="gray" width={15} height={15} />
                 <Text className="text-gray-800 text-xs"> {address}</Text>
               </View>
-              <View className="flex-row items-center space-x-1">
+              {/* <View className="flex-row items-center space-x-1">
                 <Icon.Truck color="gray" width={15} height={15} />
                 <Text className="text-gray-800 text-xs">
                   {' '}
                   ₦{currencyFormatter(delivery_fee)}
                 </Text>
-              </View>
+              </View> */}
             </View>
           </View>
         </View>

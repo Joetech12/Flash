@@ -35,7 +35,7 @@ const Categories = ({ categories, selectedCategory, onCategoryPress }) => {
                 {category._id == 'All' ? (
                   <Image
                     style={{ width: 45, height: 45 }}
-                    source={require('../assets/icon.png')}
+                    source={require('../assets/all_icon.png')}
                     className="rounded-full"
                   />
                 ) : (

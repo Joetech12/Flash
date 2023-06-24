@@ -14,17 +14,23 @@ import {
   selectBasketTotal,
 } from '../slices/basketSlice';
 import { selectRestaurant } from '../slices/restaurantSlice';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 // import { urlFor } from '../sanity';
 import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import { featured } from '../constants';
 import { currencyFormatter } from '../utils/currencyFormat';
 import { selectFood } from '../slices/foodSlice';
+import { selectDeliveryFee } from '../slices/deliveryFeeSlice';
 
 export default function BasketScreen() {
+//   const { params: dispatchData } = useRoute();
+
+//   console.log(dispatchData);
+
   const restaurant = useSelector(selectRestaurant);
   const food = useSelector(selectFood);
+  const deliveryFee = useSelector(selectDeliveryFee);
 
   const usedRestaurant = restaurant || food.restaurant;
   //   const restaurant = featured.restaurants[0];
@@ -34,7 +40,8 @@ export default function BasketScreen() {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const deliveryFee = usedRestaurant.delivery_fee;
+//   const deliveryFee = 0 || dispatchData.delivery_fee;
+  // restaurant.delivery_fee || food.restaurant.delivery_fee || 10;
   useMemo(() => {
     const gItems = basketItems.reduce((group, item) => {
       if (group[item.id]) {
@@ -47,6 +54,12 @@ export default function BasketScreen() {
     setGroupedItems(gItems);
     // console.log('items: ',gItems);
   }, [basketItems]);
+
+  const navigateHandle = () => {
+    if (basketTotal != 0) {
+      navigation.navigate('PreparingOrder');
+    }
+  };
 
   return (
     <View className=" bg-white flex-1">
@@ -162,8 +175,13 @@ export default function BasketScreen() {
         </View>
         <View>
           <TouchableOpacity
-            style={{ backgroundColor: themeColors.bgColor(1) }}
-            onPress={() => navigation.navigate('PreparingOrder')}
+            style={{
+              backgroundColor:
+                basketTotal != 0
+                  ? themeColors.bgColor(1)
+                  : themeColors.bgColor(0.2),
+            }}
+            onPress={navigateHandle}
             className="p-3 rounded-full"
           >
             <Text className="text-white text-center font-bold text-lg">

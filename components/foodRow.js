@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { ArrowRightIcon } from 'react-native-heroicons/outline';
 import RestaurantCard from './restaurantCard';
@@ -9,7 +15,7 @@ import FoodCard from './foodCard';
 
 export default function FoodRow({ foods }) {
   //   const [restaurants, setRestaurants] = useState([]);
-    // const [selectFoods, setSelectFoods] = useState(foods);
+  // const [selectFoods, setSelectFoods] = useState(foods);
 
   //   useEffect(() => {
   //     getFeaturedRestaurantById(id).then(data=>{
@@ -17,40 +23,38 @@ export default function FoodRow({ foods }) {
   //       setRestaurants(data?.restaurants);
   //     })
   //   }, [id]);
-    // console.log(foods);
+  // console.log(foods);
 
   return (
     <View className="">
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 15,
-        }}
-        className="overflow-visible py-5"
-      >
-        {foods?.map((fd) => {
-          const { _id, description, image, category, restaurant, price, name } =
-            fd;
-
-          //   console.log(fd);
-
-          return (
+      {foods.length ? (
+        <FlatList
+          horizontal
+          data={foods}
+          keyExtractor={(item) => String(item?._id)}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 15,
+          }}
+          className="overflow-visible py-2"
+          renderItem={({ item, index }) => (
             <FoodCard
-              key={_id}
-              id={_id}
-              name={name}
-              image={image}
-              category={category}
-              restaurant={restaurant}
-              price={price}
-              description={description}
+              id={item?._id}
+              name={item?.name}
+              image={item?.image}
+              restaurant={item?.restaurant}
+              price={item?.price}
+              description={item?.description}
             />
-            // <Text>Hello</Text>
-          );
-        })}
-        {/* <Text>Hello2</Text> */}
-      </ScrollView>
+          )}
+        />
+      ) : (
+        <View className="flex-row h-[200px]  justify-center items-center w-full ">
+          <Text className="text-gray-500 w-full  text-center ">
+            No meal available
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

@@ -3,20 +3,34 @@ import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBasketItems, selectBasketTotal } from '../slices/basketSlice';
 import { useNavigation } from '@react-navigation/native';
-import { selectRestaurant } from '../slices/restaurantSlice';
+import { selectRestaurant, setRestaurant } from '../slices/restaurantSlice';
 import { themeColors } from '../theme';
 import { currencyFormatter } from '../utils/currencyFormat';
+import { setFood } from '../slices/foodSlice';
+import { useEffect } from 'react';
+import {
+  selectDeliveryFeeRestaurant,
+  setDeliveryFee,
+  setDeliveryFeeRestaurant,
+} from '../slices/deliveryFeeSlice';
 
 export default function BasketIcon() {
   const basketItems = useSelector(selectBasketItems);
   const basketTotal = useSelector(selectBasketTotal);
   const navigation = useNavigation();
   if (!basketItems.length) return null;
+
+  let dispatch = useDispatch();
+
+  const navigateHandler = () => {
+    dispatch(setDeliveryFee(500));
+    navigation.navigate('Cart');
+  };
   return (
     <View className="absolute bottom-5 w-full z-50">
       <TouchableOpacity
         style={{ backgroundColor: themeColors.bgColor(1) }}
-        onPress={() => navigation.navigate('Cart')}
+        onPress={navigateHandler}
         className="flex-row justify-between items-center mx-5 rounded-full p-4 py-3 shadow-lg"
       >
         <View

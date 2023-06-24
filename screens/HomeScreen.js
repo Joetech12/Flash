@@ -34,6 +34,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useContext } from 'react';
 import { FoodContext } from '../context/foodContext';
+import Loading from '../components/loading';
 
 // const ALL = 'All';
 
@@ -46,7 +47,8 @@ export default function HomeScreen() {
   const dispatch = useDispatch();
 
   //   const newFood = [...foods];
-
+  const [showFooter, setShowFooter] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
   const [food, setFood] = useState(foodie);
@@ -61,6 +63,13 @@ export default function HomeScreen() {
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      setShowLoading(false);
+    }, 2000);
+    setTimeout(() => {
+      setShowFooter(true);
+    }, 5000);
+
     // setSelectedTag()
     getCategories().then((data) => {
       // console.log('got data', data[0].name);
@@ -98,16 +107,20 @@ export default function HomeScreen() {
   //   console.log(foodie);
 
   return (
-    <SafeAreaView className="bg-white pt-[10px]">
+    <SafeAreaView className="bg-white pt-[10px] flex-1">
       <StatusBar barStyle="default" />
       {/* search header */}
-      <Header />
+      <Header
+        pressable={true}
+        showSearchIcon={true}
+        onPress={() => navigation.navigate('Search')}
+      />
 
       {/* main */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: 50,
+          paddingBottom: 30,
         }}
       >
         <Categories
@@ -124,6 +137,14 @@ export default function HomeScreen() {
         <View className="my-3">
           <VendorRow restaurants={restaurants} />
         </View>
+
+        {showFooter && (
+          <View>
+            <Text className="text-gray-500 w-full text-center mt-[0px]">
+              Ifeanyi Umeh © 2023
+            </Text>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -26,15 +26,7 @@ export default function FoodScreen() {
   let dispatch = useDispatch();
 
   const {
-    params: {
-      id,
-      name,
-      description,
-      image,
-      category,
-      restaurant,
-      price,
-    },
+    params: { id, name, description, image, category, restaurant, price },
   } = useRoute();
 
   useLayoutEffect(() => {
@@ -42,9 +34,9 @@ export default function FoodScreen() {
   }, []);
 
   useEffect(() => {
-    if (food.restaurant && food.restaurant.id != id) {
-      dispatch(emptyBasket());
-    }
+    // if (food.restaurant && food.restaurant.id != id) {
+    //   dispatch(emptyBasket());
+    // }
     dispatch(
       setFood({
         id,
@@ -57,8 +49,6 @@ export default function FoodScreen() {
       })
     );
   }, []);
-
-  
 
   //   console.log(dishes);
 
@@ -139,7 +129,15 @@ export default function FoodScreen() {
         <View className="pb-36 bg-gray-100/10 ">
           <Text className="px-4 py-4 text-2xl font-bold">Make Order</Text>
           {/* dishes */}
-          <FoodOrder id={id} name={name} price={price} image={image} />
+          <FoodOrder
+            id={id}
+            name={name}
+            description={description}
+            price={price}
+            category={category}
+            restaurant={restaurant}
+            image={image}
+          />
         </View>
       </ScrollView>
     </>

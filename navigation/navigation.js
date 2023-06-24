@@ -13,6 +13,7 @@ import { FoodContext } from '../context/foodContext';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFoodData, setFoodData2 } from '../slices/foodDataSlice';
+import SearchScreen from '../screens/SearchScreen';
 // import PreparingOrderScreen from './screens/PreparingOrderScreen';
 // import DeliveryScreen from './screens/DeliveryScreen';
 const Stack = createNativeStackNavigator();
@@ -42,6 +43,7 @@ export default function Navigation() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Restaurant" component={RestaurantScreen} />
           <Stack.Screen name="Food" component={FoodScreen} />
           <Stack.Screen

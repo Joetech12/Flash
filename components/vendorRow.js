@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { ArrowRightIcon } from 'react-native-heroicons/outline';
 import RestaurantCard from './restaurantCard';
@@ -7,16 +13,6 @@ import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 
 export default function VendorRow({ restaurants }) {
-  //   const [restaurants, setRestaurants] = useState([]);
-
-  //   useEffect(() => {
-  //     getFeaturedRestaurantById(id).then(data=>{
-  //       // console.log('got data: ',data);
-  //       setRestaurants(data?.restaurants);
-  //     })
-  //   }, [id]);
-  // console.log(resturants);
-
   return (
     <View className="">
       <View className="flex-row justify-between items-center px-4">
@@ -27,59 +23,51 @@ export default function VendorRow({ restaurants }) {
           </Text>
         </View>
 
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text style={{ color: themeColors.text }} className="font-semibold">
             See All
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 15,
-        }}
-        className="overflow-visible py-5"
-      >
-        {restaurants.map((restaurant) => {
-          const { _id, address, coordinates, delivery_fee, delivery_time, description, dishes, image, lat, lng, name, opening_time, payment_type, rating, reviews,  } = restaurant;
-          return (
-            // <RestaurantCard
-            //   key={restaurant.id}
-            //   id={restaurant.id}
-            //   imgUrl={restaurant.image}
-            //   title={restaurant.name}
-            //   rating={restaurant.reviews}
-            //   type={restaurant.category}
-            //   address="123 main street"
-            //   description={restaurant.description}
-            //   dishes={restaurant.dishes}
-            //   lng={restaurant.lng}
-            //   lat={restaurant.lat}
-            //   stars={restaurant.stars}
-            // />
+      {restaurants.length ? (
+        <FlatList
+          horizontal
+          data={restaurants}
+          keyExtractor={(item) => String(item?._id)}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 15,
+          }}
+          className="overflow-visible py-2"
+          renderItem={({ item, index }) => (
             <RestaurantCard
-              key={_id}
-              id={_id}
-              image={image}
-              name={name}
-              rating={rating}
-              address={address}
-              coordinates={coordinates}
-              delivery_fee={delivery_fee}
-              delivery_time={delivery_time}
-              description={description}
-              dishes={dishes}
-              opening_time={opening_time}
-              lng={lng}
-              lat={lat}
-              payment_type={payment_type}
-              reviews={reviews}
+              key={item?._id}
+              id={item?._id}
+              image={item?.image}
+              name={item?.name}
+              rating={item?.rating}
+              address={item?.address}
+              coordinates={item?.coordinates}
+              delivery_fee={item?.delivery_fee}
+              delivery_time={item?.delivery_time}
+              description={item?.description}
+              dishes={item?.dishes}
+              opening_time={item?.opening_time}
+              lng={item?.lng}
+              lat={item?.lat}
+              payment_type={item?.payment_type}
+              reviews={item?.reviews}
             />
-          );
-        })}
-      </ScrollView>
+          )}
+        />
+      ) : (
+        <View className="flex-row h-[200px]  justify-center items-center w-full ">
+          <Text className="text-gray-500 w-full  text-center ">
+            No Restaurant available
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
