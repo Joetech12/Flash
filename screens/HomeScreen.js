@@ -8,7 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useState, useEffect, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FeaturedRow from '../components/featuredRow';
 import {
@@ -39,7 +39,7 @@ import Loading from '../components/loading';
 // const ALL = 'All';
 
 export default function HomeScreen() {
-  const { foods, setFoods } = useContext(FoodContext);
+  //   const { foods, setFoods } = useContext(FoodContext);
 
   const foodie = useSelector(selectFoodData);
   const foodie2 = useSelector(selectFoodData2);
@@ -77,12 +77,6 @@ export default function HomeScreen() {
     });
     getRestaurants().then((data) => {
       setRestaurants(data);
-    });
-
-    // setFood(foodie);
-    getDishes().then((data) => {
-      setFood(data);
-      //   console.log(data)
     });
   }, []);
 
@@ -123,19 +117,20 @@ export default function HomeScreen() {
           paddingBottom: 30,
         }}
       >
-        <Categories
-          categories={allCategories}
-          selectedCategory={selectedTag}
-          onCategoryPress={setSelectedTag}
-        />
-
-        <View className="">
-          <FoodRow foods={foodie} />
-          {/* <Text>{restaurants.dishes.name[0]}</Text> */}
+        <View className="my-2">
+          <VendorRow restaurants={restaurants} />
         </View>
 
-        <View className="my-3">
-          <VendorRow restaurants={restaurants} />
+        <View className="mb-5">
+          <Categories
+            categories={allCategories}
+            selectedCategory={selectedTag}
+            onCategoryPress={setSelectedTag}
+          />
+          <View className="">
+            <FoodRow foods={foodie} />
+            {/* <Text>{restaurants.dishes.name[0]}</Text> */}
+          </View>
         </View>
 
         {showFooter && (

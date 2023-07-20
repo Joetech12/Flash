@@ -14,8 +14,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 import { currencyFormatter } from '../utils/currencyFormat';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setFood } from '../slices/foodSlice';
 
-export default function FoodCard({
+const FoodCard = ({
   id,
   name,
   description,
@@ -23,9 +26,28 @@ export default function FoodCard({
   category,
   restaurant,
   price,
-}) {
-  // console.log(urlFor(imgUrl).url());
+}) => {
   const navigation = useNavigation();
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    // if (food.restaurant && food.restaurant.id != id) {
+    //   dispatch(emptyBasket());
+    // }
+    dispatch(
+      setFood({
+        id,
+        name,
+        description,
+        image,
+        category,
+        restaurant,
+        price,
+      })
+    );
+  }, []);
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -58,14 +80,16 @@ export default function FoodCard({
         {/* <Image className="h-36 w-64 rounded-t-3xl" source={imgUrl} /> */}
 
         <View className="px-3 pb-4 space-y-2">
-          <Text className="text-[16px] font-semibold pt-2">{name?.length > 25
-                  ? name.slice(0, 25) + '...'
-                  : name}</Text>
+          <Text className="text-[16px] font-semibold pt-2">
+            {name?.length > 25 ? name.slice(0, 25) + '...' : name}
+          </Text>
           <View className="flex-row items-center space-x-4">
             <View className="flex-row items-center space-x-1">
               <BanknotesIcon color="gray" width={20} height={20} />
               <Text className="text-xs">
-                <Text className="text-gray-700">₦{currencyFormatter(price)}</Text>
+                <Text className="text-gray-700">
+                  ₦{currencyFormatter(price)}
+                </Text>
                 {/* <Text className="font-semibold text-gray-700">{type}</Text> */}
               </Text>
             </View>
@@ -81,8 +105,7 @@ export default function FoodCard({
         </View>
       </View>
     </TouchableWithoutFeedback>
-    // <>
-    //   <Text>gh{name}</Text>
-    // </>
   );
-}
+};
+
+export default React.memo(FoodCard);

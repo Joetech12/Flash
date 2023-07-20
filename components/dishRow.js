@@ -11,7 +11,7 @@ import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 import { currencyFormatter } from '../utils/currencyFormat';
 
-export default function DishRow({ name, description, id, price, image }) {
+const DishRow = ({ name, description, id, price, image }) => {
   const dispatch = useDispatch();
   const basketItems = useSelector((state) => selectBasketItemsById(state, id));
   const handleIncrease = () => {
@@ -40,13 +40,15 @@ export default function DishRow({ name, description, id, price, image }) {
             <Text className="text-[18px] mb-[5px]">
               {name?.length > 40 ? name.slice(0, 40) + '...' : name}
             </Text>
-            {description && <Text className="text-gray-700">
-              {`${
-                description?.length > 90
-                  ? description.slice(0, 90) + '...'
-                  : description
-              }`}
-            </Text>}
+            {description && (
+              <Text className="text-gray-700">
+                {`${
+                  description?.length > 90
+                    ? description.slice(0, 90) + '...'
+                    : description
+                }`}
+              </Text>
+            )}
           </View>
           <View className="flex-row pl-3 justify-between items-center">
             <Text className="text-gray-700 text-lg font-bold">
@@ -86,4 +88,6 @@ export default function DishRow({ name, description, id, price, image }) {
       </View>
     </>
   );
-}
+};
+
+export default React.memo(DishRow);

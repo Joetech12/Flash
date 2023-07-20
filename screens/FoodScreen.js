@@ -22,7 +22,7 @@ import FoodOrder from '../components/foodOrder';
 
 export default function FoodScreen() {
   const navigation = useNavigation();
-  const food = useSelector(selectFood);
+  
   let dispatch = useDispatch();
 
   const {
@@ -33,27 +33,30 @@ export default function FoodScreen() {
     navigation.setOptions({ headerShown: false });
   }, []);
 
-  useEffect(() => {
-    // if (food.restaurant && food.restaurant.id != id) {
-    //   dispatch(emptyBasket());
-    // }
-    dispatch(
-      setFood({
-        id,
-        name,
-        description,
-        image,
-        category,
-        restaurant,
-        price,
-      })
-    );
-  }, []);
+//   useEffect(() => {
+//     // if (food.restaurant && food.restaurant.id != id) {
+//     //   dispatch(emptyBasket());
+//     // }
+//     dispatch(
+//       setFood({
+//         id,
+//         name,
+//         description,
+//         image,
+//         category,
+//         restaurant,
+//         price,
+//       })
+//     );
+//   }, []);
+
+  const food = useSelector(selectFood);
 
   //   console.log(dishes);
 
   return (
     <>
+      {/* <Text onPress={navigation.navigate('Cart')}>go to</Text> */}
       <BasketIcon />
       <ScrollView>
         <View className="relative pt-[0px]">
@@ -133,11 +136,12 @@ export default function FoodScreen() {
             id={id}
             name={name}
             description={description}
-            price={price}
-            category={category}
             restaurant={restaurant}
+            category={category}
+            price={price}
             image={image}
           />
+       
         </View>
       </ScrollView>
     </>

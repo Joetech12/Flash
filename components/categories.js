@@ -9,7 +9,7 @@ const Categories = ({ categories, selectedCategory, onCategoryPress }) => {
   //   const [activeCategory, setActiveCategory] = useState(null);
 
   return (
-    <View className="mt-4">
+    <View className="mt-0">
       <ScrollView
         // className="p-4"
         horizontal

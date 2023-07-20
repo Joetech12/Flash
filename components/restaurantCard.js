@@ -14,7 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 
-export default function RestaurantCard({
+const RestaurantCard = ({
   id,
   address,
   coordinates,
@@ -30,7 +30,7 @@ export default function RestaurantCard({
   payment_type,
   rating,
   reviews,
-}) {
+}) => {
   // console.log(urlFor(imgUrl).url());
   const navigation = useNavigation();
   return (
@@ -103,4 +103,6 @@ export default function RestaurantCard({
       </View>
     </TouchableWithoutFeedback>
   );
-}
+};
+
+export default React.memo(RestaurantCard);

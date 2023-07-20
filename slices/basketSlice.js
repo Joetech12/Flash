@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createSelector  } from '@reduxjs/toolkit'
 
 const initialState = {
   items: [],
@@ -30,7 +30,7 @@ export const basketSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { addToBasket, removeFromBasket, emptyBasket } = basketSlice.actions
 
-export const selectBasketItems = state=> state.basket.items;
+export const selectBasketItems = (state=> state.basket.items);
 
 export const selectBasketItemsById = (state, id)=> state.basket.items.filter(item=> item.id==id);
 

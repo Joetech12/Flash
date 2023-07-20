@@ -4,7 +4,7 @@ import * as Progress from 'react-native-progress';
 import { styles, theme, themeColors } from '../theme';
 const { width, height } = Dimensions.get('window');
 
-export default function Loading() {
+const Loading = () => {
   return (
     <View
       style={{ height, width }}
@@ -17,4 +17,6 @@ export default function Loading() {
       />
     </View>
   );
-}
+};
+
+export default React.memo(Loading);

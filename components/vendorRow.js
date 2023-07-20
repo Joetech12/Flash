@@ -12,7 +12,7 @@ import { getFeaturedRestaurantById } from '../api';
 import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 
-export default function VendorRow({ restaurants }) {
+const VendorRow = ({ restaurants }) => {
   return (
     <View className="">
       <View className="flex-row justify-between items-center px-4">
@@ -70,4 +70,6 @@ export default function VendorRow({ restaurants }) {
       )}
     </View>
   );
-}
+};
+
+export default React.memo(VendorRow);

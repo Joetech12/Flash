@@ -21,12 +21,12 @@ import { themeColors } from '../theme';
 import { featured } from '../constants';
 import { currencyFormatter } from '../utils/currencyFormat';
 import { selectFood } from '../slices/foodSlice';
-import { selectDeliveryFee } from '../slices/deliveryFeeSlice';
+import { selectDeliveryFee, setDeliveryFee } from '../slices/deliveryFeeSlice';
 
 export default function BasketScreen() {
-//   const { params: dispatchData } = useRoute();
+  //   const { params: dispatchData } = useRoute();
 
-//   console.log(dispatchData);
+  //   console.log(dispatchData);
 
   const restaurant = useSelector(selectRestaurant);
   const food = useSelector(selectFood);
@@ -40,7 +40,8 @@ export default function BasketScreen() {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
-//   const deliveryFee = 0 || dispatchData.delivery_fee;
+
+  //   const deliveryFee = 0 || dispatchData.delivery_fee;
   // restaurant.delivery_fee || food.restaurant.delivery_fee || 10;
   useMemo(() => {
     const gItems = basketItems.reduce((group, item) => {
@@ -54,6 +55,12 @@ export default function BasketScreen() {
     setGroupedItems(gItems);
     // console.log('items: ',gItems);
   }, [basketItems]);
+
+  useMemo(() => {
+    if (basketTotal == 0) {
+      dispatch(setDeliveryFee(0));
+    }
+  }, [basketTotal]);
 
   const navigateHandle = () => {
     if (basketTotal != 0) {

@@ -14,16 +14,20 @@ import {
   setDeliveryFeeRestaurant,
 } from '../slices/deliveryFeeSlice';
 
-export default function BasketIcon() {
+const BasketIcon = () => {
+  const navigation = useNavigation();
   const basketItems = useSelector(selectBasketItems);
   const basketTotal = useSelector(selectBasketTotal);
-  const navigation = useNavigation();
-  if (!basketItems.length) return null;
-
   let dispatch = useDispatch();
 
-  const navigateHandler = () => {
+  if (!basketItems.length) return null;
+
+  const dispatchFee = () => {
     dispatch(setDeliveryFee(500));
+  };
+
+  const navigateHandler = () => {
+    dispatchFee();
     navigation.navigate('Cart');
   };
   return (
@@ -51,4 +55,6 @@ export default function BasketIcon() {
       </TouchableOpacity>
     </View>
   );
-}
+};
+
+export default React.memo(BasketIcon);

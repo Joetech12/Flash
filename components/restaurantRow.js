@@ -11,7 +11,7 @@ import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 import { currencyFormatter } from '../utils/currencyFormat';
 
-export default function RestaurantRow({ name, description, id, price, image }) {
+const RestaurantRow = ({ name, description, id, price, image }) => {
   const dispatch = useDispatch();
   const basketItems = useSelector((state) => selectBasketItemsById(state, id));
   const handleIncrease = () => {
@@ -78,4 +78,6 @@ export default function RestaurantRow({ name, description, id, price, image }) {
       </View>
     </>
   );
-}
+};
+
+export default React.memo(RestaurantRow);

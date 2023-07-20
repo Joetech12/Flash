@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import Input from './Input';
 import { XMarkIcon } from 'react-native-heroicons/outline';
 
-export default function Header({ pressable, onPress, backButton, showSearchIcon }) {
+const Header = ({ pressable, onPress, backButton, showSearchIcon }) => {
   const basketItems = useSelector(selectBasketItems);
 
   const navigation = useNavigation();
@@ -34,7 +34,12 @@ export default function Header({ pressable, onPress, backButton, showSearchIcon 
       </View>
       <View className="flex-row flex-1 items-center p-3 rounded-full border border-gray-300">
         <View className="flex-1">
-          <Input pressable={pressable} onPress={onPress} showSearchIcon={showSearchIcon} backButton />
+          <Input
+            pressable={pressable}
+            onPress={onPress}
+            showSearchIcon={showSearchIcon}
+            backButton
+          />
         </View>
         {!backButton && (
           <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
@@ -67,4 +72,6 @@ export default function Header({ pressable, onPress, backButton, showSearchIcon 
         </View> */}
     </View>
   );
-}
+};
+
+export default React.memo(Header);

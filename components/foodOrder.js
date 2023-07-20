@@ -11,11 +11,19 @@ import { themeColors } from '../theme';
 import * as Icon from 'react-native-feather';
 import { currencyFormatter } from '../utils/currencyFormat';
 
-export default function FoodOrder({ name, id, price, image }) {
+const FoodOrder = ({
+  name,
+  description,
+  restaurant,
+  category,
+  id,
+  price,
+  image,
+}) => {
   const dispatch = useDispatch();
   const basketItems = useSelector((state) => selectBasketItemsById(state, id));
   const handleIncrease = () => {
-    dispatch(addToBasket({ id, name, price, image, }));
+    dispatch(addToBasket({ id, name, price, image, description }));
   };
   const handleDecrease = () => {
     dispatch(removeFromBasket({ id }));
@@ -30,17 +38,12 @@ export default function FoodOrder({ name, id, price, image }) {
             uri: urlFor(image).url(),
           }}
         />
-        {/* <Image
-          className="rounded-3xl"
-          style={{ height: 100, width: 100 }}
-          source={image}
-        /> */}
+
         <View className="flex flex-1 space-y-3">
           <View className="pl-3 ">
             <Text className="text-[18px] mb-[5px]">
               {name?.length > 40 ? name.slice(0, 40) + '...' : name}
             </Text>
-            
           </View>
           <View className="flex-row pl-3 justify-between items-center">
             <Text className="text-gray-700 text-lg font-bold">
@@ -78,6 +81,9 @@ export default function FoodOrder({ name, id, price, image }) {
           </View>
         </View>
       </View>
+      {/* <Text onPress={handleIncrease}>Buy</Text> */}
     </>
   );
-}
+};
+
+export default React.memo(FoodOrder);

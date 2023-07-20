@@ -13,7 +13,7 @@ import * as Icon from 'react-native-feather';
 import { themeColors } from '../theme';
 import FoodCard from './foodCard';
 
-export default function FoodRow({ foods }) {
+const FoodRow = ({ foods }) => {
   //   const [restaurants, setRestaurants] = useState([]);
   // const [selectFoods, setSelectFoods] = useState(foods);
 
@@ -57,4 +57,6 @@ export default function FoodRow({ foods }) {
       )}
     </View>
   );
-}
+};
+
+export default React.memo(FoodRow);

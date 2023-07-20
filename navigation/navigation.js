@@ -9,7 +9,7 @@ import DeliveryScreen from '../screens/DeliveryScreen';
 import FoodScreen from '../screens/FoodScreen';
 import { useEffect } from 'react';
 import { getDishes, getRestaurants } from '../api';
-import { FoodContext } from '../context/foodContext';
+// import { FoodContext } from '../context/foodContext';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFoodData, setFoodData2 } from '../slices/foodDataSlice';
@@ -39,7 +39,7 @@ export default function Navigation() {
   //   console.log(foods);
 
   return (
-    <FoodContext.Provider value={{ foods, setFoods }}>
+    // <FoodContext.Provider value={{ foods, setFoods }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
@@ -63,6 +63,6 @@ export default function Navigation() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </FoodContext.Provider>
+    // </FoodContext.Provider>
   );
 }
